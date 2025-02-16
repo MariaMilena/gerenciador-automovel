@@ -90,11 +90,25 @@ public class VeiculoService {
 	            .orElseThrow(() -> new IllegalArgumentException("Event not found"));
 	}
 	
-	public void deleteVeiculo(UUID veiculoId){
+	public void deleteVeiculo(UUID id) {
+        // Verifica se o veículo existe
+        Veiculo veiculo = veiculoRepository.findById(id)
+            .orElseThrow(() -> new RuntimeException("Veículo não encontrado"));
 
-        this.veiculoRepository.delete(this.veiculoRepository.findById(veiculoId)
-                .orElseThrow(() -> new IllegalArgumentException("Event not found")));
+        // Verifica se o veículo está vinculado a um carro
+        Optional<Carro> carro = carroRepository.findByVeiculoId(id);
+        if (carro.isPresent()) {
+            carroRepository.delete(carro.get()); // Exclui o carro relacionado
+        }
 
+        // Verifica se o veículo está vinculado a uma moto
+        Optional<Moto> moto = motoRepository.findByVeiculoId(id);
+        if (moto.isPresent()) {
+            motoRepository.delete(moto.get()); // Exclui a moto relacionada
+        }
+
+        // Exclui o veículo
+        veiculoRepository.delete(veiculo);
     }
 	
 	public Veiculo updateVeiculo(UUID veiculoId, VeiculoRequestDTO data) {
