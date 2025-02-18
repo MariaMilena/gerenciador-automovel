@@ -1,4 +1,4 @@
-package com.xwz.frota.api.domain.tipoCombustivel;
+package com.xwz.frota.domain.entities;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonValue;
 

@@ -1,9 +1,6 @@
-package com.xwz.frota.api.domain.carro;
+package com.xwz.frota.domain.entities;
 
 import java.util.UUID;
-
-import com.xwz.frota.api.domain.tipoCombustivel.TipoCombustivel;
-import com.xwz.frota.api.domain.veiculo.Veiculo;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

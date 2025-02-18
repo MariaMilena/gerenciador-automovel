@@ -1,13 +1,11 @@
 package com.xwz.frota.api.controller;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -21,11 +19,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xwz.frota.api.domain.veiculo.Veiculo;
-import com.xwz.frota.api.domain.veiculo.VeiculoNaoEncontradoException;
-import com.xwz.frota.api.domain.veiculo.VeiculoRequestDTO;
-import com.xwz.frota.api.domain.veiculo.VeiculoResponseDTO;
-import com.xwz.frota.api.service.VeiculoService;
+import com.xwz.frota.api.exceptions.VeiculoNaoEncontradoException;
+import com.xwz.frota.application.dtos.VeiculoRequestDTO;
+import com.xwz.frota.application.dtos.VeiculoResponseDTO;
+import com.xwz.frota.application.service.VeiculoService;
+import com.xwz.frota.domain.entities.Veiculo;
 
 @RestController
 @CrossOrigin("*")

@@ -1,4 +1,4 @@
-package com.xwz.frota.api.service;
+package com.xwz.frota.application.service;
 
 import java.lang.System.Logger;
 import java.util.List;
@@ -12,14 +12,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import com.xwz.frota.api.domain.carro.Carro;
-import com.xwz.frota.api.domain.moto.Moto;
-import com.xwz.frota.api.domain.veiculo.Veiculo;
-import com.xwz.frota.api.domain.veiculo.VeiculoRequestDTO;
-import com.xwz.frota.api.domain.veiculo.VeiculoResponseDTO;
-import com.xwz.frota.api.repositories.CarroRepository;
-import com.xwz.frota.api.repositories.MotoRepository;
-import com.xwz.frota.api.repositories.VeiculoRepository;
+import com.xwz.frota.application.dtos.VeiculoRequestDTO;
+import com.xwz.frota.application.dtos.VeiculoResponseDTO;
+import com.xwz.frota.domain.entities.Carro;
+import com.xwz.frota.domain.entities.Moto;
+import com.xwz.frota.domain.entities.Veiculo;
+import com.xwz.frota.infra.repositories.CarroRepository;
+import com.xwz.frota.infra.repositories.MotoRepository;
+import com.xwz.frota.infra.repositories.VeiculoRepository;
 
 @Service
 public class VeiculoService {
@@ -96,19 +96,19 @@ public class VeiculoService {
             .orElseThrow(() -> new RuntimeException("Veículo não encontrado"));
 
         // Verifica se o veículo está vinculado a um carro
-        Optional<Carro> carro = carroRepository.findByVeiculoId(id);
+        Optional<Carro> carro = carroRepository.findByCarroId(id);
         if (carro.isPresent()) {
-            carroRepository.delete(carro.get()); // Exclui o carro relacionado
+            carroRepository.excluirCarro(carro.get().getId()); // Exclui o carro relacionado
         }
 
         // Verifica se o veículo está vinculado a uma moto
-        Optional<Moto> moto = motoRepository.findByVeiculoId(id);
+        Optional<Moto> moto = motoRepository.findByMotoId(id);
         if (moto.isPresent()) {
-            motoRepository.delete(moto.get()); // Exclui a moto relacionada
+            motoRepository.excluirMoto(moto.get().getId()); // Exclui a moto relacionada
         }
 
         // Exclui o veículo
-        veiculoRepository.delete(veiculo);
+        veiculoRepository.excluirVeiculo(veiculo.getId());
     }
 	
 	public Veiculo updateVeiculo(UUID veiculoId, VeiculoRequestDTO data) {

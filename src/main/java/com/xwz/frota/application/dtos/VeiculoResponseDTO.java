@@ -1,4 +1,4 @@
-package com.xwz.frota.api.domain.veiculo;
+package com.xwz.frota.application.dtos;
 
 import java.math.BigDecimal;
 import java.util.UUID;

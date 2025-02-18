@@ -1,8 +1,6 @@
-package com.xwz.frota.api.domain.veiculo;
+package com.xwz.frota.application.dtos;
 
 import java.math.BigDecimal;
-
-import com.xwz.frota.api.domain.tipoCombustivel.TipoCombustivel;
 
 public record VeiculoRequestDTO(
     String modelo,
@@ -11,7 +9,7 @@ public record VeiculoRequestDTO(
     BigDecimal preco,
     String tipo, // "carro" ou "moto"
     Integer quantidadePortas, // Apenas para carros
-    TipoCombustivel tipoCombustivel, // Apenas para carros
+    com.xwz.frota.domain.entities.TipoCombustivel tipoCombustivel, // Apenas para carros
     Integer cilindrada // Apenas para motos
 ) {
 }
